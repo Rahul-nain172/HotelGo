@@ -31,6 +31,9 @@ app.use("/api/auth",authRoute);
 app.use("/api/hotel",HotelRoute);
 app.use('/api/payment',paymentRoute);
 app.use('/api/booking',bookingRoute);
+app.get('/',(req,res)=>{
+    res.json('Welcome to Hotel Go');
+})
 app.listen(3000,()=>{
     connect();
     console.log('app is running at 3000');
