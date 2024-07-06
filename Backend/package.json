@@ -2,9 +2,16 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "./src/index.js",
-  "type": "module",
+    "type": "module",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "test": "jest",
+    "build": "npm run clean && npm run build:client && npm run build:server",
+    "build:client": "vite build",
+    "build:server": "tsc",
+    "clean": "rm -rf dist",
+    "lint": "eslint ."
   },
   "author": "",
   "license": "ISC",
