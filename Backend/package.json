@@ -5,11 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js", 
+    "start": "node src/index.js",
     "test": "jest",
-    "build": "npm run clean && npm run build:client && npm run build:server",
-    "build:client": "vite build",
-    "build:server": "tsc -p ./server/tsconfig.json",
+    "build": "npm run clean",
     "clean": "rm -rf dist",
     "lint": "eslint ."
   },
