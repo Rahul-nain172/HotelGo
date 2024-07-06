@@ -18,7 +18,6 @@ import { Input } from '@/components/ui/input';
 
 import { saveAdultCount, saveCheckIn, saveCheckOut, saveChildCount } from '@/redux/search/searchSlice';
 const backendURI=import.meta.env.VITE_BACKEND_URI;
-console.log(backendURI);
 export default function Hotelpage() {
 
     const { hotelId } = useParams();

@@ -32,7 +32,7 @@ export default function ForgotPassword() {
                   setLinkSent(false);
             }
         } catch (error) {
-            console.error('Error:', error);
+            throw new Error(error)
         }
     };
 

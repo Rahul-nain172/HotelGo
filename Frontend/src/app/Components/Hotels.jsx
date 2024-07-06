@@ -20,7 +20,6 @@ export default function Hotels() {
     const dispatch=useDispatch();
     const searchOptions = useSelector((state) => state.searchOptions);
     const fetchSearch = async () => {
-        console.log('fetching....',searchOptions)
         const queryParams = new URLSearchParams();
         queryParams.append("destination", searchOptions.destination || "");
         queryParams.append("checkIn", searchOptions.checkIn || "");
@@ -34,7 +33,7 @@ export default function Hotels() {
         searchOptions.stars?.forEach((star)=>queryParams.append("stars",star));
         searchOptions.facilities?.forEach((facility)=>queryParams.append("facilities",facility));
         searchOptions.types?.forEach((type)=>queryParams.append("types",type));
-        // console.log(searchOptions);
+
         const token = localStorage.getItem('token');
         const response = await fetch(`${backendURI}/api/hotel/search?${queryParams}`, {
             method: 'GET',
@@ -55,7 +54,6 @@ export default function Hotels() {
     });
     useEffect(()=>{
         if(data){
-            console.log('data fetched: ',data)
             dispatch(setSearchResults(data));
         }
     },[data])
@@ -84,7 +82,7 @@ export default function Hotels() {
                 <span>
                     <select defaultValue={"SortBy"}
                         className="block w-full h-12 my-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        onChange={(e)=>{e.preventDefault();console.log('saving...',e.target.value);dispatch(saveSortOption(e.target.value))}}>
+                        onChange={(e)=>{e.preventDefault();dispatch(saveSortOption(e.target.value))}}>
                         <option value="" >Sort By</option>
                         <option value="pricePerNightDesc" >Price High to Low</option>
                         <option value="pricePerNightAsc">Price Low to High</option>

@@ -47,7 +47,6 @@ export default function Filters() {
         else dispatch(removeType(type));
     }
     const changePrice = (event) => {
-        console.log('cliked', event.target.value)
         setPrice(event.target.value)
     }
     return (
@@ -78,7 +77,7 @@ export default function Filters() {
                 </CardHeader>
                 <CardContent className='flex justify-start '>
                     <div className='flex flex-col justify-start gap-2'>
-                        {hotelFacilities.map((facility, index) => (<div className='flex gap-1'>
+                        {hotelFacilities.map((facility, index) => (<div key={index} className='flex gap-1'>
                             <input
                                 id={`facility-${index}`}
                                 type='checkbox'
@@ -97,7 +96,7 @@ export default function Filters() {
                 </CardHeader>
                 <CardContent>
                     <div className='flex flex-col justify-start gap-2'>
-                        {Ratings.map((rating, index) => (<div className='flex gap-1'><input
+                        {Ratings.map((rating, index) => (<div key={index} className='flex gap-1'><input
                             id={`rating-${index}`}
                             type='checkbox'
                             value={rating}
@@ -114,7 +113,7 @@ export default function Filters() {
                 </CardHeader>
                 <CardContent className='flex justify-start '>
                     <div className='flex flex-col justify-start gap-2'>
-                        {hotelTypes.map((type, index) => (<div className='flex gap-1'><input
+                        {hotelTypes.map((type, index) => (<div key={index} className='flex gap-1'><input
                             id={`type-${index}`}
                             value={type}
                             type='checkbox'

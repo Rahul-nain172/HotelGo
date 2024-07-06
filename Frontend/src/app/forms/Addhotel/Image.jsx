@@ -17,10 +17,8 @@ export default function Image() {
     const existingImageUrls = watch("imageUrls");
     const deleteImage=(event,url)=>{
         event.preventDefault();
-        console.log('clicked');
         setValue("imageUrls",existingImageUrls.filter((imageUrl)=>imageUrl!==url))
     }
-    console.log(existingImageUrls);
     return (
         <Card>
             <CardHeader>

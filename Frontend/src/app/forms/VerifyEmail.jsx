@@ -1,8 +1,10 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { useLocation } from 'react-router-dom'
+import { useToast } from '@/components/ui/use-toast';
 const backendURI=import.meta.env.VITE_BACKEND_URI;
 export default function verifyEmail() {
+    const {toast}=useToast();
     const location=useLocation();
     const queryParams = new URLSearchParams(location.search);
     const token=queryParams.get('token');
@@ -16,10 +18,12 @@ export default function verifyEmail() {
                 body:JSON.stringify({token})
             });
             if(response.ok){
-                console.log('email verified');
+                toast({
+                    description: "Email Verified",
+                  })
             }
             else {
-                console.log('error in verifying Email');
+                throw new Error('error in verifying Email');
             }
         }
         catch(error){

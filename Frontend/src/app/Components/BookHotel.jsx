@@ -130,11 +130,11 @@ export default function BookHotel() {
                             bookingMutation.mutate(data);
                         }
                         else{
-                            console.log('not okay bhai');
+                            throw new Error('error')
                         }
                     }
                     catch (error) {
-                        console.log(error);
+                        throw new Error('error')
                     }
 
                 },
@@ -156,7 +156,7 @@ export default function BookHotel() {
             paymentObject.open();
         }
         catch (error) {
-            console.log(error);
+            throw new Error(error)
         }
     };
     const bookNow = (event) => {

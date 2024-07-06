@@ -83,7 +83,6 @@ const App = () => {
     const token=localStorage.getItem('token');
     if(token){
       const decodedToken=jwtDecode(token);
-      console.log('adding user details');
       dispatch(setUser(decodedToken));
     }
   },[])
@@ -98,12 +97,11 @@ const App = () => {
                 
                 if (refreshTime+86400<=currTime) {
                   dispatch(resetUser());//reseting user info
-                  console.log('removing token..')
                     localStorage.removeItem('token');
                     localStorage.removeItem('refreshTime');
                 }
             } catch (error) {
-                console.error('Error handling token:', error);
+                throw new Error('Error handling token:', error);
             }
         }
     }, 5000);

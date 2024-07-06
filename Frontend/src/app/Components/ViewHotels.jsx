@@ -83,15 +83,15 @@ export default function ViewHotels() {
               </CardDescription>
             </CardHeader>
             <CardContent className='flex justify-between text-lg'>
-              <div className='grid grid-cols-1 gap-3 w-2/3 items-center md:grid-cols-2 lg:grid-cols-3'>
+              <span className='grid grid-cols-1 gap-3 w-2/3 items-center md:grid-cols-2 lg:grid-cols-3'>
                 <Skeleton className='h-16 w-full rounded-md' />
                 <Skeleton className='h-16 w-full rounded-md' />
                 <Skeleton className='h-16 w-full rounded-md' />
-              </div>
-              <div className='flex flex-col justify-between gap-10'>
+              </span>
+              <span className='flex flex-col justify-between gap-10'>
                 <Skeleton className='h-16 w-16 rounded-full' />
                 <Skeleton className='h-16 w-16 rounded-full' />
-              </div>
+              </span>
             </CardContent>
           </Card>
         ))}

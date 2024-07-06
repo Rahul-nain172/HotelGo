@@ -33,12 +33,11 @@ export default function ResetPassword() {
                 setTimeout(() => {
                     navigate('/auth/signin');
                 }, 3000);
-                console.log('Password reset successful');
             } else {
-                console.log('Error resetting password');
+                throw new Error('error')
             }
         } catch (error) {
-            console.error('Error:', error);
+            throw new Error(error)
         }
     };
 
