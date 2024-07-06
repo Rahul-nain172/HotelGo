@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 function formatDateString(dateString) {
     const date = new Date(dateString);
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -17,6 +19,8 @@ function formatDateString(dateString) {
 }
 const backendURI=import.meta.env.VITE_BACKEND_URI;
 export default function Booking() {
+    const navigate=useNavigate();
+    const user=useSelector((state)=>state.user);
     const fetchBookings = async () => {
         const token = localStorage.getItem('token');
         const response = await fetch(`${backendURI}/api/booking/getBookings`, {
@@ -34,6 +38,11 @@ export default function Booking() {
         queryKey: ['bookings'],
         queryFn: fetchBookings,
     });
+    useEffect(()=>{
+        if(!user.isLoggedIn){
+            navigate('/auth/signin');
+        }
+    },[user])
     if (isLoading) return (<>Loading...</>)
 
     return (
