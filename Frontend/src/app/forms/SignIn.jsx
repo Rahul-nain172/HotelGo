@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '@/redux/user/userSlice';
 import { jwtDecode } from 'jwt-decode';
 import { useToast } from "@/components/ui/use-toast"
+import signInImage from '/signinImage.jpg';
 import {
     Card,
     CardContent,
@@ -62,7 +63,7 @@ export default function SignIn() {
     }
     });
     return (
-    <div className='flex justify-center items-center min-h-screen dark bg-zinc-200 '>
+    <div className='flex justify-center items-center min-h-screen dark bg-zinc-200  bg-cover bg-center' style={{ backgroundImage: `url(${signInImage})` }}>
             <Card className="w-[350px] md:w-[450px] ">
                 <CardHeader>
                     <CardTitle className='text-3xl text-center font-semibold py-2'>

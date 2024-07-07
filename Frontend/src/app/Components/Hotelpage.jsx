@@ -89,7 +89,7 @@ export default function Hotelpage() {
                             </div>
                         </div>
                         <div className='flex flex-col gap-4 border-2 justify-center items-center py-4 px-4  '>
-                            <div className='flex justify-between w-full  text-lg font-semibold'> <span >Per Night </span><span className=''>{hotel.pricePerNight}</span></div>
+                            <div className='flex justify-between w-full  text-lg font-semibold'> <span >Per Night </span><span className=''>{hotel.pricePerNight} $</span></div>
                             <Date_Picker checkIn={checkIn} checkOut={checkOut} isCheckIn={true} func={setCheckIn} />
                             <Date_Picker checkIn={checkIn} checkOut={checkOut} isCheckIn={false} func={setCheckOut} />
                             <div className='flex gap-2'>

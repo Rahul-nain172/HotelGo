@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { resetUser } from '@/redux/user/userSlice';
 import { useSelector,useDispatch } from 'react-redux';
 import { Button } from '@/components/ui/button';
+import Footer from './Footer.jsx';
 const backendURI=import.meta.env.VITE_BACKEND_URI;
 export default function Navbar() {
   const user=useSelector((state)=>state.user);
@@ -70,6 +71,7 @@ export default function Navbar() {
       </div>
     </nav>
     <Outlet/>
+    <Footer/>
     </>
   )
 }

@@ -12,6 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { useToast } from "@/components/ui/use-toast"
+import signInImage from '/signinImage.jpg';
 const backendURI=import.meta.env.VITE_BACKEND_URI;
 export default function SignUp() {
     const { toast } = useToast()
@@ -52,7 +53,7 @@ export default function SignUp() {
     const watchPassword = watch("password", "");
 
     return (
-        <div className='flex justify-center items-center min-h-screen dark bg-zinc-200 '>
+        <div className='flex justify-center items-center min-h-screen dark bg-zinc-200  bg-cover bg-center' style={{ backgroundImage: `url(${signInImage})` }}>
             <Card className="w-[350px] md:w-[450px] ">
                 <CardHeader>
                     <CardTitle className='text-3xl text-center font-semibold py-2'>

@@ -6,7 +6,7 @@ export function Date_Picker(props) {
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
   return (
-    <div className="border-2 w-full ">
+    <div className="border-2 border-black w-full ">
       <DatePicker
         selected={props.isCheckIn?props.checkIn:props.checkOut}
         onChange={(date) =>props.func(date)}

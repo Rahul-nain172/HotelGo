@@ -45,14 +45,6 @@ const router = createBrowserRouter([
         element:<ViewHotels/>
       },
       {
-        path: 'auth/signup',
-        element: <SignUp />
-      },
-      {
-        path: 'auth/signin',
-        element: <SignIn />
-      },
-      {
         path:'updateHotel/addHotel',
         element:<Addhotel/>
       },
@@ -61,6 +53,14 @@ const router = createBrowserRouter([
         element:<Edithotel/>
       }
     ]
+  },
+  {
+    path: 'auth/signup',
+    element: <SignUp />
+  },
+  {
+    path: 'auth/signin',
+    element: <SignIn />
   },
   {
     path:'/verifyEmail',

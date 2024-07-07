@@ -21,16 +21,17 @@ const changePage = (value) => {
 const totalPages = Math.ceil((searchResults.count || 0) / 5);
 
 return (
-  <Pagination>
+
+  <Pagination className='my-4 '>
     <PaginationContent>
       <PaginationItem>
-        <PaginationPrevious
+        <PaginationPrevious className='text-lg'
           href="#"
           onClick={() => changePage(page > 1 ? page - 1 : 1)}
         />
       </PaginationItem>
       {Array.from({ length: totalPages }, (_, index) => (
-        <PaginationItem key={index}>
+        <PaginationItem key={index} className='text-lg'>
           <PaginationLink
             href="#"
             onClick={() => changePage(index + 1)}
@@ -45,9 +46,9 @@ return (
         </PaginationItem>
       )}
       <PaginationItem>
-        <PaginationNext
+        <PaginationNext className='text-lg'
           href="#"
-          onClick={() => changePage(page < totalPages ? page + 1 : totalPages)}
+          onClick={() => changePage(page<totalPages?page+1:page)}
         />
       </PaginationItem>
     </PaginationContent>

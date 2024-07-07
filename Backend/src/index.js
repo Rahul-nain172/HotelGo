@@ -20,10 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
-    origin: [
-      'https://hotelgo172.netlify.app',
-      'http://localhost:5174',
-    ],
+    origin: process.env.FRONTEND_URI,
     credentials: true,
   };
   
