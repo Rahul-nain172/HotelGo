@@ -9,15 +9,16 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { FaStar } from "react-icons/fa";
 import { useQuery } from '@tanstack/react-query';
 import { setSearchResults } from '@/redux/searchResult/searchResultsSlice';
 import { saveSortOption } from '@/redux/search/searchSlice';
-const backendURI=import.meta.env.VITE_BACKEND_URI;
+const backendURI = import.meta.env.VITE_BACKEND_URI;
 export default function Hotels() {
-    const { hotels,count } = useSelector((state) => state.searchResults);
-    const dispatch=useDispatch();
+    const { hotels, count } = useSelector((state) => state.searchResults);
+    const dispatch = useDispatch();
     const searchOptions = useSelector((state) => state.searchOptions);
     const fetchSearch = async () => {
         const queryParams = new URLSearchParams();
@@ -27,12 +28,12 @@ export default function Hotels() {
         queryParams.append("adultCount", searchOptions.adultCount || "");
         queryParams.append("childCount", searchOptions.childCount || "");
         queryParams.append("page", searchOptions.page || "");
-        queryParams.append("minPrice",searchOptions.minPrice||'0');
-        queryParams.append("maxPrice",searchOptions.maxPrice||'1000');
-        queryParams.append("sortOption",searchOptions.sortOption||"");
-        searchOptions.stars?.forEach((star)=>queryParams.append("stars",star));
-        searchOptions.facilities?.forEach((facility)=>queryParams.append("facilities",facility));
-        searchOptions.types?.forEach((type)=>queryParams.append("types",type));
+        queryParams.append("minPrice", searchOptions.minPrice || '0');
+        queryParams.append("maxPrice", searchOptions.maxPrice || '1000');
+        queryParams.append("sortOption", searchOptions.sortOption || "");
+        searchOptions.stars?.forEach((star) => queryParams.append("stars", star));
+        searchOptions.facilities?.forEach((facility) => queryParams.append("facilities", facility));
+        searchOptions.types?.forEach((type) => queryParams.append("types", type));
 
         const token = localStorage.getItem('token');
         const response = await fetch(`${backendURI}/api/hotel/search?${queryParams}`, {
@@ -48,15 +49,15 @@ export default function Hotels() {
             throw new Error('Failed to Search hotels');
         }
     }
-    const { data, error, isLoading} = useQuery({
-        queryKey: ['hotelss',searchOptions],
+    const { data, error, isLoading } = useQuery({
+        queryKey: ['hotelss', searchOptions],
         queryFn: fetchSearch,
     });
-    useEffect(()=>{
-        if(data){
+    useEffect(() => {
+        if (data) {
             dispatch(setSearchResults(data));
         }
-    },[data])
+    }, [data])
 
     const truncateText = (text, maxWords) => {
         const words = text.split(' ');
@@ -69,10 +70,65 @@ export default function Hotels() {
         let len = facilities.length;
         return facilities.slice(0, Math.min(len, 3))
     }
-    if (isLoading) return <div>loading....</div>;
-    if (error) return <div>Error: {error.message}</div>;
+    if (isLoading) {
+        return( <div className='flex flex-col gap-4'>
+            <div className='flex justify-between'>
+              <span className='flex justify-center items-center text-center text-md font-semibold lg:text-lg'>
+                Loading Results...
+              </span>
+              <span>
+                <select
+                  defaultValue={"SortBy"}
+                  className="block w-full h-12 my-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                >
+                  <option value="" disabled>Sort By</option>
+                  <option value="pricePerNightDesc">Price High to Low</option>
+                  <option value="pricePerNightAsc">Price Low to High</option>
+                  <option value="starsRatingDesc">Rating High to Low</option>
+                  <option value="starsRatingAsc">Rating Low to High</option>
+                </select>
+              </span>
+            </div>
+            {[...Array(3)].map((_, index) => (
+              <Card className='lg:px-4 pt-5 h-80' key={index}>
+                <CardContent className='p-0 grid grid-cols-1 h-2/3 lg:grid-cols-2'>
+                  <div className='flex justify-center my-2 mx-4'>
+                    <Skeleton className='h-72 w-full xl:h-auto xl:w-full' />
+                  </div>
+                  <div className='flex flex-col px-2'>
+                    <div className='flex'>
+                      {[...Array(5)].map((_, starIndex) => (
+                        <Skeleton key={starIndex} className='text-yellow-400' circle={true} width={24} height={24} />
+                      ))}
+                    </div>
+                    <div className='flex justify-between'>
+                      <Skeleton className='md:text-lg lg:text-xl font-semibold' width='80%' />
+                      <div className='border border-solid rounded-lg border-yellow-400 bg-yellow-100 px-2'>
+                        <Skeleton className='w-2 h-2 rounded-full bg-yellow-600 inline-block mr-1' circle={true} />
+                        <Skeleton className='' width='60%' />
+                      </div>
+                    </div>
+                    <Skeleton className='lg:text-lg' style={{ fontWeight: '450' }} width='40%' />
+                    <Skeleton className='mt-8 text-sm lg:text-md' width='80%' />
+                  </div>
+                </CardContent>
+                <CardFooter className='flex flex-col gap-2 lg:flex-row lg:justify-between'>
+                  <div className='flex gap-3 mt-4 justify-start'>
+                    {[...Array(3)].map((_, facilityIndex) => (
+                      <Skeleton key={facilityIndex} className='rounded-lg flex text-sm lg:text-md text-center items-center border border-solid px-2 bg-gray-300' style={{ fontWeight: '450' }} width='60%' />
+                    ))}
+                    <Skeleton className='text-sm lg:text-md' width='30%' />
+                  </div>
+                  <Button className='flex justify-center w-32 h-12'>View</Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        );
+    };
+    if (error) return <div className='text-2xl font-bold flex justify-center h-screen'>Error: {error.message}</div>;
     if (!hotels) {
-        return <div>No Hotel Found</div>
+        return <div className='text-2xl font-bold flex justify-center h-screen'>No Hotel Found</div>
     }
 
     return (
@@ -82,7 +138,7 @@ export default function Hotels() {
                 <span>
                     <select defaultValue={"SortBy"}
                         className="block w-full h-12 my-2 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        onChange={(e)=>{e.preventDefault();dispatch(saveSortOption(e.target.value))}}>
+                        onChange={(e) => { e.preventDefault(); dispatch(saveSortOption(e.target.value)) }}>
                         <option value="" >Sort By</option>
                         <option value="pricePerNightDesc" >Price High to Low</option>
                         <option value="pricePerNightAsc">Price Low to High</option>

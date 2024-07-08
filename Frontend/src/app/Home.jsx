@@ -38,7 +38,9 @@ export default function Home() {
                 </div>
                 <div className="sm:col-span-3 sm:pl-4">
                     <Hotels />
+                    <div className='bg-gray-200'>
                     <Pagination />
+                    </div>
                 </div>
             </div>
         </div>
